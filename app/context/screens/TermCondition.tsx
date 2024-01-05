@@ -7,7 +7,8 @@ import Ionicons from '@expo/vector-icons/Ionicons'
 import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const TermCondition = () => {
+const TermCondition = ({navigation, route}:any) => {
+    const [text, setText] = useState([])
 
     const loadData = async () => {
         const token = await SecureStore.getItemAsync(TOKEN_KEY)
@@ -21,10 +22,9 @@ const TermCondition = () => {
                 Authorization: `${token}`
             }
         }).then(res => res.json()).then(res => {
-            console.log(res);
-            console.log('success')
+            setText(res.data)
         }).catch(err => {
-            console.log('failed')
+            console.log(err)
             return err
         })
     }
@@ -33,9 +33,16 @@ const TermCondition = () => {
         loadData()
         
     }, [])
+
+    const customHTML = `
+        <body style="display:flex; flex-direction: column; 
+        align-items:center; height: 100%; padding-left: 40; padding-right:40; font-size: 12pt">
+            ${text.body}
+        </body>`;
+
     return (
         <SafeAreaView style={{flex: 1}}>
-        <View style={{width: '100%', height: 60, backgroundColor: '#2a4fa3', paddingTop: 15, borderBottomLeftRadius: 30, paddingHorizontal: 20}}>
+        <View style={{width: '100%', height: 60, backgroundColor: '#2a4fa3', paddingTop: 10, borderBottomLeftRadius: 30, paddingHorizontal: 20}}>
 
             <View style={{flexDirection: 'row', justifyContent:'space-between', alignItems:'center'}}>
                 <TouchableOpacity onPress={() => navigation.openDrawer()}>
@@ -48,6 +55,14 @@ const TermCondition = () => {
             </View>
 
         </View>
+
+        {/* <View style={{height:20, width:'100%', backgroundColor:'#fff'}} />  */}
+        <WebView
+        originWhitelist={['*']}
+        source={{ html: customHTML}}
+        scrollEnabled
+        />
+
         </SafeAreaView>
     )
 }

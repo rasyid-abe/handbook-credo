@@ -93,7 +93,7 @@ const FraudAdd = ({navigation}: any) => {
 
   return (
     <SafeAreaView>
-      <View style={{width: '100%', height: 60, backgroundColor: '#2a4fa3', paddingTop: 15, borderBottomLeftRadius: 30, paddingHorizontal: 20}}>
+      <View style={{width: '100%', height: 60, backgroundColor: '#2a4fa3', paddingTop: 10, borderBottomLeftRadius: 30, paddingHorizontal: 20}}>
         <View style={{flexDirection: 'row', justifyContent:'space-between', alignItems:'center'}}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Ionicons name='arrow-back' size={25} color='#fff' />

@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { WebView } from 'react-native-webview';
 import { API_URL, USER_DATA, TOKEN_KEY} from '../AuthContext'
@@ -21,7 +21,6 @@ const ReadText = ({navigation, route}:any) => {
             Authorization: `${token}`
           }
         }).then(res => res.json()).then(res => {
-            console.log(res.data);
             setText(res.data)
         }).catch(err => {
           return err
@@ -32,9 +31,18 @@ const ReadText = ({navigation, route}:any) => {
         loadData()
         
     }, [])
+
+    const customHTML = `
+        <body style="display:flex; flex-direction: column; 
+        align-items:center; height: 100%; padding-left: 40; padding-right:40; font-size: 12pt: margin-top:40">
+            ${text.body}
+        </body>`;
+
+    const INJECTEDJAVASCRIPT = "document.body.style.userSelect = 'none'";
+
     return (
-        <View style={{flex:1}}>
-            <View style={{width: '100%', height: 60, backgroundColor: '#2a4fa3', paddingTop: 15, borderBottomLeftRadius: 30, paddingHorizontal: 20}}>
+        <SafeAreaView style={{flex:1}}>
+            <View style={{width: '100%', height: 60, backgroundColor: '#2a4fa3', paddingTop: 10, borderBottomLeftRadius: 30, paddingHorizontal: 20}}>
 
                 <View style={{flexDirection: 'row', justifyContent:'space-between', alignItems:'center'}}>
                     <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -45,14 +53,15 @@ const ReadText = ({navigation, route}:any) => {
 
             </View>
 
-            <View style={{height:20, width:'100%', backgroundColor:'#fff'}} /> 
+            <View style={{height:10, width:'100%', backgroundColor:'#fff'}} /> 
             <WebView
             originWhitelist={['*']}
-            source={{ html: text.body}}
+            source={{ html: customHTML}}
+            injectedJavaScript={INJECTEDJAVASCRIPT}
             scrollEnabled
             />
 
-        </View>
+        </SafeAreaView>
     )
 }
 

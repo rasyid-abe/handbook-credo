@@ -51,14 +51,6 @@ const datas = [
   
 ];
 
-const NoneGroup = () => {
-  return (
-    <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
-      <Text style={{marginTop:30}}>No Data</Text>
-    </View>
-  )
-}
-
 const Home = ({navigation, route}: any) => {
   const {authState, onLogin, onLogout} = useAuth()
   const [result, setResult] = useState([])
@@ -84,8 +76,9 @@ const Home = ({navigation, route}: any) => {
       if (res.message == 'Invalid Token!' || res.message == 'Invalid request!') {
         onLogout()
       }
-      setResult(res.data.group)
+      
       setSlide(res.data.slide)
+      setResult(res.data.group)
     }).catch(err => {
       console.log(err)
       return err
@@ -105,11 +98,11 @@ const Home = ({navigation, route}: any) => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <StatusBar backgroundColor={'#2a4fa3'} barStyle="light-content" />
-      <View style={{width: '100%', height:150, backgroundColor:'#2a4fa3', paddingTop: 15, borderBottomLeftRadius: 25, borderBottomRightRadius: 25}}>
+      <View style={{width: '100%', height:150, backgroundColor:'#2a4fa3', paddingTop: 10, borderBottomLeftRadius: 25, borderBottomRightRadius: 25}}>
         
         <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems:'center', paddingHorizontal: 20}}>
           <View>
-            <Text style={{color: '#fff', fontSize: 20, fontWeight: 'bold'}}>Hia. {userData.fullname}</Text>
+            <Text style={{color: '#fff', fontSize: 20, fontWeight: 'bold'}}>Hi. {userData.fullname}</Text>
             <Text style={{color: '#fff', gap: 8}}>Let's explore this application</Text>
           </View>
           <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
@@ -140,20 +133,13 @@ const Home = ({navigation, route}: any) => {
       </View>
           
       <ScrollView style={{paddingHorizontal: 20}} showsVerticalScrollIndicator={false}>
-        {/* { datas.map((item,i) => (
-          <GroupDocument 
-            key={i}
-            content={item.content}
-            navigation={navigation}
-          />
-        ))} */}
-        { result.length > 0 ? result.map((item,i) => (
+        {result.map((item,i) => (
           <GroupDocument 
             key={i}
             item={item}
             navigation={navigation}
           />
-        )) : <NoneGroup />}
+        ))}
       </ScrollView>
 
     </SafeAreaView>

@@ -15,18 +15,26 @@ const Detail = ({title, icon, onPress}:any) => {
     )
 }
 
+const NoneData = () => {
+    return (
+      <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+        <Text style={{marginTop:30}}>No Data</Text>
+      </View>
+    )
+  }
+
 const GroupDocument = ({item, navigation}:any) => {
   return (
     <SafeAreaView>
         <View style={{flex: 1, flexDirection: 'row'}}>
-            {item.map(item => (
+            {item.length > 0 ? item.map(item => (
                <Detail 
                     key={item.id}  
                     title={item.name}
                     icon={item.icon}
                     onPress={() => navigation.navigate('ListDocuments', {title: item.name, id: item.id})}
                 />
-            ))}
+            )) : <NoneData />}
         </View>
     </SafeAreaView>
   )
