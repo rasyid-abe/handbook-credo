@@ -4,7 +4,7 @@ import Ionicons from '@expo/vector-icons/Ionicons'
 import * as SecureStore from 'expo-secure-store';
 import axios from 'axios';
 export const API_URL = 'http://handbook-credo.id/';
-// export const API_URL = 'http://192.168.1.6/hih_admin/';
+// export const API_URL = 'http://192.168.1.6/hih_admirn/';
 
 const App = () => {
   const [nik, setNik] = useState('');
@@ -27,6 +27,8 @@ const App = () => {
   }
 
   const getData = async () => {
+    console.log('balclake');
+    
     try {
       const result = await axios.get(`${API_URL}appauth/show`);
       console.log('success');
