@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../screens/Home';
 import Fraud from '../screens/Fraud';
@@ -12,7 +12,9 @@ import ReadText from '../screens/ReadText';
 import FraudAdd from '../screens/FraudAdd';
 import DetailFraud from '../screens/DetailFraud';
 import Search from '../screens/Search';
-
+import Fid from '../screens/Fid';
+import FidForm from '../screens/FidForm';
+import ListCarousel from '../component/ListCarousel';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -27,6 +29,9 @@ const HomeStack = () => {
       <Stack.Screen name='ReadPdf' component={ReadPdf} />
       <Stack.Screen name='ReadText' component={ReadText} />
       <Stack.Screen name='Search' component={Search} />
+      <Stack.Screen name='Fid' component={Fid} />
+      <Stack.Screen name='FidForm' component={FidForm} />
+      <Stack.Screen name='ListCarousel' component={ListCarousel} />
     </Stack.Navigator>
   )
 }

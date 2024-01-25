@@ -14,7 +14,7 @@ interface AuthProps {
 export const TOKEN_KEY = 'my-jwt';
 export const USER_DATA = 'itsme';
 export const API_URL = 'http://handbook-credo.id/';
-// export const API_URL = 'http://192.168.1.6/hih_admin/';
+// export const API_URL = 'http://192.168.1.7/hih_admin/';
 const AuthContext = createContext<AuthProps>({});
 
 
@@ -62,7 +62,7 @@ export const AuthProvider = ({children}: any) => {
         formData.append('password', password)
 
         try {
-            const result = await fetch(`${API_URL}appauth`, {
+            await fetch(`${API_URL}appauth`, {
                 method: 'POST',
                 headers: {
                     Accept: "application/x-www-form-urlencoded",
@@ -86,8 +86,10 @@ export const AuthProvider = ({children}: any) => {
 
             
         } catch(e) {
-            console.log((e as any).response.data.message);
-            return {error: true, msg: (e as any).response.data.message}
+            console.log((e as any));
+            
+            // console.log((e as any).response.data.message);
+            // return {error: true, msg: (e as any).response.data.message}
         }
 
         // await fetch(`${API_URL}appauth`, {

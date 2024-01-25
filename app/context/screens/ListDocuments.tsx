@@ -13,7 +13,7 @@ const ListDocument = ({title, desc, type, onPress}: any) => {
                         <Ionicons name={type != 'pdf' ? 'document-text-outline' : 'reader-outline'} size={50} style={{color:'#fff'}} />  
                         <View>
                             <Text style={{textTransform: 'uppercase', color:'#fff', fontSize:10, marginBottom:-5}}>{type}</Text>
-                            <Text style={{fontSize: 20, fontWeight: 'bold', color:'#fff'}}>{title}</Text>
+                            <Text style={{fontSize: 16, fontWeight: 'bold', color:'#fff'}}>{title}</Text>
                             <Text style={{marginTop:-2, color:'#fff'}}>{desc != null ? desc.substring(0, 50) : 'None'}</Text>
                         </View>
                     </View>  
@@ -52,7 +52,7 @@ const ListDocuments = ({navigation, route}:any) => {
     }
     
     useEffect(() => {
-        console.log('view data list dokumen');
+        // console.log('view data list dokumen');
         loadData()
         
     }, [])
@@ -83,9 +83,10 @@ const ListDocuments = ({navigation, route}:any) => {
                 />
             ))}
                   
-          
+            <View style={{ height: 120 }} />
         </ScrollView>
         </View>
+        
     </SafeAreaView>
     )
 }
