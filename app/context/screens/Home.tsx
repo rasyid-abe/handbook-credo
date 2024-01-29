@@ -62,24 +62,33 @@ const datas = [
   },
 ];
 
-const ShowFid = ({onPress}:any) => {
+const ShowFid = ({ onPress }: any) => {
   return (
-    <SafeAreaView style={{marginTop: -25}}>
+    <SafeAreaView style={{ marginTop: -25 }}>
       <View style={{ paddingHorizontal: 20, marginBottom: 10 }}>
         <Text style={{ fontSize: 16, fontWeight: "bold" }}>Feedback FID</Text>
       </View>
 
-      <View style={{ paddingHorizontal: 20, marginBottom: 20}}>
-      <TouchableOpacity 
-            style={{width: '100%', height: 50, backgroundColor: '#2a4fa3', borderRadius: 5, justifyContent:'center', alignItems:'center'}}
-            onPress={onPress}
-          >
-            <Text style={{fontSize: 16, fontWeight:'bold', color:'white'}}>Data FID</Text>
-          </TouchableOpacity>
+      <View style={{ paddingHorizontal: 20, marginBottom: 20 }}>
+        <TouchableOpacity
+          style={{
+            width: "100%",
+            height: 50,
+            backgroundColor: "#2a4fa3",
+            borderRadius: 5,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          onPress={onPress}
+        >
+          <Text style={{ fontSize: 16, fontWeight: "bold", color: "white" }}>
+            Data FID
+          </Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
-  )
-}
+  );
+};
 
 const Home = ({ navigation, route }: any) => {
   const { authState, onLogin, onLogout } = useAuth();
@@ -87,7 +96,8 @@ const Home = ({ navigation, route }: any) => {
   const [slide, setSlide] = useState([]);
   const [looks, setLooks] = useState("");
   const [userData, setUserData] = useState([]);
-  const [shFid, setShFid] = useState(false)
+  const [shFid, setShFid] = useState(false);
+  const [notif, setNotif] = useState(0)
 
   const loadData = async () => {
     const token = await SecureStore.getItemAsync(TOKEN_KEY);
@@ -96,7 +106,7 @@ const Home = ({ navigation, route }: any) => {
     const nikp = JSON.parse(uinfo);
     setUserData(JSON.parse(uinfo));
 
-    let params = {'nik': nikp.nik};
+    let params = { nik: nikp.nik };
 
     fetch(`${API_URL}api/home?${new URLSearchParams(params)}`, {
       headers: {
@@ -111,6 +121,9 @@ const Home = ({ navigation, route }: any) => {
         ) {
           onLogout();
         }
+        console.log(res.data.notif);
+        
+        setNotif(res.data.notif)
         setShFid(res.data.showfid);
         setSlide(res.data.slide);
         setResult(res.data.group);
@@ -128,7 +141,6 @@ const Home = ({ navigation, route }: any) => {
 
   useEffect(() => {
     loadData();
-    
   }, [route]);
 
   return (
@@ -160,12 +172,40 @@ const Home = ({ navigation, route }: any) => {
               Let's explore this application
             </Text>
           </View>
-          <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-            <Image
-              source={{ uri: `${API_URL}assets/profiles/${userData.foto}` }}
-              style={{ height: 45, width: 45, borderRadius: 5 }}
-            />
-          </TouchableOpacity>
+          <View style={{ flexDirection: "row" }}>
+            <TouchableOpacity onPress={() => navigation.navigate("Notification")}>
+              <View
+                style={{
+                  position: 'relative',
+                  marginVertical: 6,
+                  marginHorizontal: 10,
+                }}
+              >
+                <Ionicons name="notifications" size={30} color="white" />
+                {notif > 0 ? 
+                  <View
+                    style={{
+                      width: 15,
+                      height: 15,
+                      borderRadius: 7,
+                      backgroundColor: "red",
+                      position: "absolute",
+                      top: 0,
+                      right: 1,
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  /> : ''
+                }
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+              <Image
+                source={{ uri: `${API_URL}assets/profiles/${userData.foto}` }}
+                style={{ height: 45, width: 45, borderRadius: 5 }}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
 
         <View style={{ paddingHorizontal: 20, marginTop: 20 }}>
@@ -206,22 +246,32 @@ const Home = ({ navigation, route }: any) => {
       </View>
 
       <View style={{ paddingHorizontal: 20, marginTop: 10 }}>
-        <View style={{flexDirection:'row', justifyContent:'space-between'}}>
-          <Text style={{ fontSize: 16, fontWeight: "bold"}}>
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          <Text style={{ fontSize: 16, fontWeight: "bold" }}>
             Upcoming Information
           </Text>
-          <TouchableOpacity style={{width: 85, height: 25, backgroundColor:'#2a4fa3', borderRadius: 5, justifyContent:'center', alignItems:'center'}} onPress={() => navigation.navigate('ListCarousel', {'images': slide})}>
-            <Text style={{color:'#fff', fontSize:14}}>View image</Text>
+          <TouchableOpacity
+            style={{
+              width: 85,
+              height: 25,
+              backgroundColor: "#2a4fa3",
+              borderRadius: 5,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            onPress={() =>
+              navigation.navigate("ListCarousel", { images: slide })
+            }
+          >
+            <Text style={{ color: "#fff", fontSize: 14 }}>View image</Text>
           </TouchableOpacity>
         </View>
-        
-        
+
         <Carousel images={slide} />
       </View>
       {/* <Slider images={slide} rows={slide.length} /> */}
 
-      { shFid ? <ShowFid onPress={() => navigation.navigate('Fid')} /> : ''}
-
+      {shFid ? <ShowFid onPress={() => navigation.navigate("Fid")} /> : ""}
 
       <View style={{ paddingHorizontal: 20, marginBottom: 10 }}>
         <Text style={{ fontSize: 16, fontWeight: "bold" }}>Document Group</Text>

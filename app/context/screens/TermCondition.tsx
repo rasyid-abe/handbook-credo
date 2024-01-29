@@ -15,7 +15,7 @@ const TermCondition = ({navigation, route}:any) => {
         const uinfo = await SecureStore.getItemAsync(USER_DATA)
         const nikp = JSON.parse(uinfo)
 
-        let params = {'nik': nikp.nik}
+        let params = {'nik': nikp.nik, 'id_notif':route.params?.id_notif == undefined ? 0 : route.params?.id_notif}
     
         return fetch(`${API_URL}api/termcondition?${new URLSearchParams(params)}`, {
             headers: {
@@ -45,13 +45,13 @@ const TermCondition = ({navigation, route}:any) => {
         <View style={{width: '100%', height: 60, backgroundColor: '#2a4fa3', paddingTop: 10, borderBottomLeftRadius: 30, paddingHorizontal: 20}}>
 
             <View style={{flexDirection: 'row', justifyContent:'space-between', alignItems:'center'}}>
-                <TouchableOpacity onPress={() => navigation.openDrawer()}>
-                <Ionicons name='menu' size={25} color='#fff' />
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Ionicons name='arrow-back' size={25} color='#fff' />
                 </TouchableOpacity>
                 <Text style={{fontSize: 16, fontWeight: 'bold', color:'#fff'}}>Term & Condition</Text>
-                <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                {/* <TouchableOpacity onPress={() => navigation.navigate('Home')}>
                 <Ionicons name='home' size={25} color='#fff' />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </View>
 
         </View>

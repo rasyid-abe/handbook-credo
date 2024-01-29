@@ -14,7 +14,7 @@ const ReadPdf = ({navigation, route}:any) => {
     const uinfo = await SecureStore.getItemAsync(USER_DATA)
     
     const nikp = JSON.parse(uinfo)
-    let params = {'pdf_id': route.params?.id, 'nik':nikp.nik}
+    let params = {'pdf_id': route.params?.id, 'nik':nikp.nik, 'id_notif':route.params?.id_notif == undefined ? 0 : route.params?.id_notif}
     
     return fetch(`${API_URL}api/document_pdf?${new URLSearchParams(params)}`, {
         headers: {

@@ -14,20 +14,27 @@ const ReadText = ({navigation, route}:any) => {
         const uinfo = await SecureStore.getItemAsync(USER_DATA)
         
         const nikp = JSON.parse(uinfo)
-        let params = {'text_id': route.params?.id, 'nik':nikp.nik}
+        let params = {'text_id': route.params?.id, 'nik':nikp.nik, 'id_notif':route.params?.id_notif == undefined ? 0 : route.params?.id_notif}
         
         return fetch(`${API_URL}api/document_text?${new URLSearchParams(params)}`, {
           headers: {
             Authorization: `${token}`
           }
         }).then(res => res.json()).then(res => {
+            console.log(res.data);
+            
             setText(res.data)
         }).catch(err => {
+            console.log(err);
+            
           return err
         })
     }
 
     useEffect(() => {
+        console.log(route.params?.id_notif == undefined ? 0 : route.params?.id_notif);
+        console.log(route.params?.id);
+        
         loadData()
         
     }, [])

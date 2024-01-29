@@ -88,6 +88,8 @@ const FidForm = ({ navigation, route }: any) => {
   };
 
   useEffect(() => {
+    console.log(types);
+    
     loadData();
   }, []);
 
@@ -123,6 +125,7 @@ const FidForm = ({ navigation, route }: any) => {
     const nikp = JSON.parse(uinfo);
 
     const formData = new FormData();
+    formData.append("id_notif", route.params?.id_notif == undefined ? 0 : route.params?.id_notif);
     formData.append("nik", nikp.nik);
     formData.append("dodate", `${year}-${month}-${day} ${hour}:${minute}:00`);
     formData.append("prediction", valPrediction);
@@ -140,8 +143,8 @@ const FidForm = ({ navigation, route }: any) => {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log("success");
-        console.log(res.data);
+        // console.log("success");
+        console.log(res);
         setYear("");
         setMonth("");
         setDay("");
@@ -296,7 +299,6 @@ const FidForm = ({ navigation, route }: any) => {
             data={years}
             onSelect={(selectedItem, index) => {
               setYear(selectedItem);
-              console.log(selectedItem, index);
             }}
             defaultButtonText={"Year"}
             buttonStyle={styles.btnStyle}
@@ -321,7 +323,6 @@ const FidForm = ({ navigation, route }: any) => {
             data={months}
             onSelect={(selectedItem, index) => {
               setMonth(selectedItem);
-              console.log(selectedItem, index);
             }}
             defaultButtonText={"Month"}
             buttonStyle={styles.btnStyle}
@@ -346,7 +347,6 @@ const FidForm = ({ navigation, route }: any) => {
             data={days}
             onSelect={(selectedItem, index) => {
               setDay(selectedItem);
-              console.log(selectedItem, index);
             }}
             defaultButtonText={"Day"}
             buttonStyle={styles.btnStyle}
@@ -370,7 +370,6 @@ const FidForm = ({ navigation, route }: any) => {
             data={hours}
             onSelect={(selectedItem, index) => {
               setHour(selectedItem);
-              console.log(selectedItem, index);
             }}
             defaultButtonText={"Hour"}
             buttonStyle={styles.btnStyle}
@@ -395,7 +394,6 @@ const FidForm = ({ navigation, route }: any) => {
             data={minutes}
             onSelect={(selectedItem, index) => {
               setMinute(selectedItem);
-              console.log(selectedItem, index);
             }}
             defaultButtonText={"Minute"}
             buttonStyle={styles.btnStyle}
@@ -421,7 +419,6 @@ const FidForm = ({ navigation, route }: any) => {
             data={prediciton}
             onSelect={(selectedItem, index) => {
               setValPrediction(selectedItem);
-              console.log(selectedItem, index);
             }}
             defaultButtonText={"Prediction"}
             buttonStyle={styles.btnStylePre}

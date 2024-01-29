@@ -21,6 +21,7 @@ public class MainActivity extends ReactActivity {
     setTheme(R.style.AppTheme);
     super.onCreate(savedInstanceState);
     getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+    // getWindow().clearFlags(WindowManager.LayoutParams.FLAG_SECURE);
   }
 
   /**

@@ -13,7 +13,7 @@ const ListDocument = ({title, desc, type, onPress}: any) => {
                         <Ionicons name={type != 'pdf' ? 'document-text-outline' : 'reader-outline'} size={50} style={{color:'#fff'}} />  
                         <View>
                             <Text style={{textTransform: 'uppercase', color:'#fff', fontSize:10, marginBottom:-5}}>{type}</Text>
-                            <Text style={{fontSize: 20, fontWeight: 'bold', color:'#fff'}}>{title}</Text>
+                            <Text style={{fontSize: 16, fontWeight: 'bold', color:'#fff'}}>{title}</Text>
                             <Text style={{marginTop:-2, color:'#fff'}}>{desc != null ? desc.substring(0, 50) : 'None'}</Text>
                         </View>
                     </View>  
@@ -31,9 +31,10 @@ const Search = ({navigation, route}:any) => {
         const token = await SecureStore.getItemAsync(TOKEN_KEY)
         const uinfo = await SecureStore.getItemAsync(USER_DATA)
         setUserData(JSON.parse(uinfo))
-        
+        const nikp = JSON.parse(uinfo);
+
         let params = {}
-        params['nik'] = userData.nik
+        params['nik'] = nikp.nik
         params['key'] = route.params?.key
 
         return fetch(`${API_URL}api/search?${new URLSearchParams(params)}`, {
@@ -70,7 +71,7 @@ const Search = ({navigation, route}:any) => {
         <ScrollView style={{marginTop:10}}>
          
 
-            {document.map((item,i) => (
+            {document != undefined ? document.map((item,i) => (
                 <ListDocument
                     key={i}
                     title={item.title}
@@ -78,7 +79,7 @@ const Search = ({navigation, route}:any) => {
                     type={item.type}
                     onPress={() => navigation.navigate(item.type != 'pdf' ? 'ReadText' : 'ReadPdf', {id: item.id})}
                 />
-            ))}
+            )) : <Text>No Data</Text>}
                   
           
         </ScrollView>

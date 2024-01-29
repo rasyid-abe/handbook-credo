@@ -64,7 +64,7 @@ const Fid = ({navigation, route}:any) => {
                 <TouchableOpacity onPress={() => navigation.goBack()}>
                 <Ionicons name='arrow-back' size={25} color='#fff' />
                 </TouchableOpacity>
-                <Text style={{fontSize: 16, fontWeight: 'bold', color:'#fff'}}>Data Fid</Text>
+                <Text style={{fontSize: 16, fontWeight: 'bold', color:'#fff'}}>Data Fid | Total: {fid.length}</Text>
             </View>
 
         </View>
@@ -81,6 +81,7 @@ const Fid = ({navigation, route}:any) => {
                 onPress={() => navigation.navigate('FidForm', {id: item.id, type:item.type})}
             />
             )) : <Text style={{alignItems:'center'}}>No Data</Text>}
+            <View style={{ height: 120 }} />
         </ScrollView>
         </View>
     </SafeAreaView>

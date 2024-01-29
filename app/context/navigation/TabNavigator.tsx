@@ -15,6 +15,7 @@ import Search from '../screens/Search';
 import Fid from '../screens/Fid';
 import FidForm from '../screens/FidForm';
 import ListCarousel from '../component/ListCarousel';
+import Notification from '../component/Notification';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -32,6 +33,7 @@ const HomeStack = () => {
       <Stack.Screen name='Fid' component={Fid} />
       <Stack.Screen name='FidForm' component={FidForm} />
       <Stack.Screen name='ListCarousel' component={ListCarousel} />
+      <Stack.Screen name='Notification' component={Notification} />
     </Stack.Navigator>
   )
 }

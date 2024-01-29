@@ -138,8 +138,8 @@ const Profile = ({navigation, route}:any) => {
     <SafeAreaView>
       
       <View style={{flex: 1}}>
-        <Modal isVisible={showModal}>
-          <View style={{backgroundColor: '#fff', paddingVertical: 20, paddingHorizontal: 20, borderRadius: 5, marginHorizontal: 100}}>
+        <Modal isVisible={showModal} style={{alignItems: 'center'}}>
+          <View style={{backgroundColor: '#fff', width: '50%', paddingVertical: 20, paddingHorizontal: 20, borderRadius: 5}}>
 
             <View style={{justifyContent: 'space-between', flexDirection:'row', marginBottom: 20}}>
               <Text style={{fontSize: 16, fontWeight: 'bold'}}>Source Photo</Text>
@@ -147,8 +147,8 @@ const Profile = ({navigation, route}:any) => {
                 <Ionicons name='close' size={20} />
               </TouchableOpacity>
             </View>
-            <View style={{justifyContent:'space-between', flexDirection: 'row'}}>
-              <TouchableOpacity style={{width: 60, height:60, backgroundColor:'#cecece', borderRadius: 10, justifyContent:'center', alignItems:'center'}} onPress={() => selectImage(false)}>
+            <View style={{justifyContent:"space-between", flexDirection: 'row'}}>
+              <TouchableOpacity style={{width: 60, height:60, backgroundColor:'#cecece', borderRadius: 10, justifyContent:'center', alignItems:'center', marginRight: 5}} onPress={() => selectImage(false)}>
                 <Ionicons name='camera' size={30} style={{color: 'blue'}} />
                 <Text style={{fontWeight:'bold'}}>Camera</Text>
               </TouchableOpacity>
