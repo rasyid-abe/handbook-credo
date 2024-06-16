@@ -1,2 +1,4 @@
 npx react-native run-android
 npm start
+
+eas build -p android --profile preview
