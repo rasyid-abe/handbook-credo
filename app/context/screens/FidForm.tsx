@@ -266,8 +266,8 @@ const FidForm = ({ navigation, route }: any) => {
                 padding: 5,
               }}
             >
-              <Text style={{ fontWeight: "bold" }}>Address: </Text>
-              <Text>{datas["address"]}</Text>
+              <Text style={{ fontWeight: "bold" }}>Portfolio: </Text>
+              <Text>{datas["portfolio"]}</Text>
             </View>
             <View
               style={{

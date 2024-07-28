@@ -25,7 +25,7 @@ const CustomDrawer = (props:any) => {
                     {userData != null ? <Image source={{uri:`${API_URL}assets/profiles/${userData.foto}`}} style={{height: 50, width: 50, borderRadius: 5, marginVertical: 10, marginHorizontal: 15}} /> : ''}
                     <View style={{flexDirection: 'column', flex: 1, marginBottom: 10}}>
                         <Text style={{color: '#fff',  marginTop: 10, fontSize: 16, fontWeight: 'bold'}}>Hi, {userData != null ? userData.fullname: ''}</Text>
-                        <Text style={{color: '#fff', fontSize:12}}>Welcome to HIH App</Text>
+                        <Text style={{color: '#fff', fontSize:12}}>Welcome to PAS App</Text>
                     </View>
                 </View>
                 
